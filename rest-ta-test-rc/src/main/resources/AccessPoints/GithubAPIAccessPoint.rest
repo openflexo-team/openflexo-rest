@@ -1,0 +1,11 @@
+# Github API
+# Thu Apr 09 09:29:38 CEST 2026
+name=GitHub REST API
+baseURL=https://api.github.com
+version=2022-11-28
+description=This is the official Github API, allowing to interact with GitHub resources (repositories, users, issues, PR, etc.)
+#authentication= none, apiKey, oauth2, jwt
+#header.Content-Type=
+secretRef=github
+header.Accept=application/vnd.github+json
+header.X-GitHub-Api-Version=2022-11-28

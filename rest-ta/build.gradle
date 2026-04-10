@@ -1,0 +1,15 @@
+dependencies {
+    implementation flexoFoundation()
+    implementation group: "org.apache.httpcomponents", name: "httpclient", version: "4.5.2"
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.8.1"
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.8.1"
+    implementation group: 'commons-io', name: 'commons-io', version: '2.16.0'
+
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.3.0'
+
+    // This resource center must always be present at run-time
+    runtimeOnly project(':rest-ta-rc')
+
+    testImplementation flexoFoundationTest()
+}

@@ -1,0 +1,81 @@
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
+import java.util.Date;
+
+@URI("http://openflexo.org/rest/API/GithubAPI.fml")
+public model GithubAPI {
+
+  @RestEntity
+  @Search(url="/search/users?q={query}",protocol="GET")
+  @Get(url="/users/{login}",protocol="GET")
+  @Set(url="/users/{login}",protocol="PATCH")
+  concept User {
+      @Property @Key int id;
+      @Property String login;
+      @Property String avatarUrl;
+      @Property String url;
+      @Property String type;
+      @Property String name;
+      @Property String company;
+      @Property String blog;
+      @Property String location;
+      @Property boolean siteAdmin;
+      @Property(url="/users/{login}/repos")
+      Repository[0,*] repositories with ConceptInstance();
+      @Property(url="/users/{login}/followers")
+      User[0,*] followers with ConceptInstance();
+      @Property(url="/users/{login}/following")
+      User[0,*] following with ConceptInstance();
+
+      @Delete(url="/users/{login}",protocol="DELETE")
+      delete();
+
+      @RestEntity
+      @Search(url="/search/repositories?q={query}+user:{login}",protocol="GET") 
+      @Get(url="/repos/{login}/{name}",protocol="GET")
+      @Set(url="/repos/{login}/{name}",protocol="PATCH")
+      concept Repository {
+         @Property @Key int id;
+         @Property String name;
+         @Property(name="full_name") String fullName;
+         @Property String description;
+         @Property String html_url;
+         @Property(name="private") boolean visibility;
+         @Property(url="/repos/{login}/{name}/issues")
+         Issue[0,*] issues with ConceptInstance();
+
+         @Create(url="/user/repos",protocol="POST")
+         create();
+
+         @Delete(url="/repos/{login}/{name}",protocol="DELETE")
+         delete();
+
+         @RestEntity
+         @Get(url="/repos/{login}/{name}/issues/{number}",protocol="GET")
+         @Set(url="/repos/{login}/{name}/issues/{number}",protocol="PATCH")
+         concept Issue {
+
+            @Property @Key int id;
+            @Property int number;
+            @Property String title;
+            @Property String body;
+            @Property User assignee with ConceptInstance();
+            @Property User[0,*] assignees with ConceptInstance();
+            @Property(name="created_at") Date createdAt;
+            @Property(name="updated_at") Date updatedAt;
+            @Property(name="closed_at") Date closedAt;
+            
+            @Create(url="/repos/{login}/{name}/issues",protocol="POST")
+            create();
+
+         }
+
+      }
+   }
+
+
+ 
+}

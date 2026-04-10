@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Inspector xmlns:p="http://www.openflexo.org/pamela/" id="0" p:modelEntity="org.openflexo.gina.utils.FIBInspector" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" titleFont="SansSerif,0,12" layout="border" borderRight="0" controllerClassName="org.openflexo.fml.controller.FMLFIBInspectorController" font="SansSerif,0,12" name="Inspector">
+  <TabPanel id="1" constraints="border(location=center)" name="Tab">
+    <Tab id="2" title="Basic" align="left" borderTop="0" borderTitle="Request" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" titleFont="SansSerif,0,11" layout="twocols" borderRight="0" useScrollBar="true" verticalScrollbarPolicy="VERTICAL_SCROLLBAR_AS_NEEDED" index="0" horizontalScrollbarPolicy="HORIZONTAL_SCROLLBAR_AS_NEEDED" font="SansSerif,0,11" name="BasicTab">
+      <Label id="3" label="base_url" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="BaseUrlLabel" />
+      <TextField id="4" columns="7" data="data.baseURL" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="BaseUrlTextField" />
+      <Label id="5" label="version" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="VersionLabel" />
+      <TextField id="6" columns="7" data="data.version" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="VersionTextField" />
+      <Label id="7" label="content_type" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="ContentTypeLabel" />
+      <TextField id="8" columns="7" data="data.contentType" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="ContentTypeTextField" />
+      <Label id="9" label="secret_ref" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="SecretRefLabel" />
+      <TextField id="10" columns="7" data="data.secretRef" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="SecretRefTextField" />
+      <Label id="11" label="secret_ref_help" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="SecretRefHelpLabel" />
+      <Label id="12" label="authorization" align="left" localize="true" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="AuthorizationLabel" />
+      <TextField id="13" columns="7" data="data.authorization" enable="((data.secretRef == null) || (data.secretRef.trim.isEmpty))" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="AuthorizationTextField" />
+      <LocalizedDictionary id="14">
+        <Localized id="15" lang="English" value="Base URL" key="base_url" />
+        <Localized id="16" lang="French" value="URL de base" key="base_url" />
+        <Localized id="17" lang="English" value="Version" key="version" />
+        <Localized id="18" lang="French" value="Version" key="version" />
+        <Localized id="19" lang="English" value="Content type" key="content_type" />
+        <Localized id="20" lang="French" value="Type de contenu" key="content_type" />
+        <Localized id="21" lang="English" value="Secret name" key="secret_ref" />
+        <Localized id="22" lang="French" value="Nom du secret" key="secret_ref" />
+        <Localized id="23" lang="English" value="&lt;html&gt;&lt;i&gt;Name of a secret configured in Preferences &gt; Secrets. Resolved at runtime as the Bearer token.&lt;/i&gt;&lt;/html&gt;" key="secret_ref_help" />
+        <Localized id="24" lang="French" value="&lt;html&gt;&lt;i&gt;Nom d'un secret configuré dans Préférences &gt; Secrets. Résolu à l'exécution comme token Bearer.&lt;/i&gt;&lt;/html&gt;" key="secret_ref_help" />
+        <Localized id="25" lang="English" value="Authorization (literal, no secret)" key="authorization" />
+        <Localized id="26" lang="French" value="Authorization (littéral, sans secret)" key="authorization" />
+      </LocalizedDictionary>
+    </Tab>
+  </TabPanel>
+  <FIBVariable id="27" type="org.openflexo.technologyadapter.rest.model.RestAccessPoint" name="data" />
+  <LocalizedDictionary id="28" />
+</Inspector>

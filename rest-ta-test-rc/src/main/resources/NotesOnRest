@@ -1,0 +1,78 @@
+Un endpoint REST (ou point de terminaison REST) est une URL spécifique qui permet d’accéder à une ressource ou d’exécuter une action via une API REST.
+
+🔹 Définition simple
+Un endpoint REST = une adresse web + une méthode HTTP utilisée pour communiquer avec un serveur.
+
+🔹 Exemple concret
+
+Imaginons une API pour gérer des utilisateurs :
+
+GET https://api.exemple.com/users → récupérer la liste des utilisateurs
+GET https://api.exemple.com/users/123 → récupérer un utilisateur précis
+POST https://api.exemple.com/users → créer un utilisateur
+PUT https://api.exemple.com/users/123 → modifier un utilisateur
+DELETE https://api.exemple.com/users/123 → supprimer un utilisateur
+
+👉 Ici, chaque URL est un endpoint REST.
+
+🔹 Les éléments clés
+
+Un endpoint REST est composé de :
+
+Une URL (la ressource)
+/users
+/products/45
+
+Une méthode HTTP (l’action)
+GET → lire
+POST → créer
+PUT/PATCH → modifier
+DELETE → supprimer
+
+👉 Un endpoint REST est simplement un point d’accès à une API pour manipuler des données via HTTP.
+
+https://api.exemple.com/users > collection EndPoint
+https://api.exemple.com/users/123 > resource EndPoint
+
+Standard : OpenAPI Specification (OAS)
+Standard pour décrire une API rest
+Ancien nom : Swagger 
+Format : JSON ou YAML
+
+
+GET https://api.exemple.com/users → récupérer la liste des utilisateurs
+GET https://api.exemple.com/users/123 → récupérer un utilisateur précis
+POST https://api.exemple.com/users → créer un utilisateur
+PUT https://api.exemple.com/users/123 → modifier un utilisateur
+DELETE https://api.exemple.com/users/123 → supprimer un utilisateur
+
+model Github {
+
+  @RestEntity
+  @List(url="https://api.exemple.com/users",protocol="GET",filter="***")
+  @Get(url="https://api.exemple.com/users{id}",protocol="GET")
+  @Set(url="https://api.exemple.com/users{id},protocol="PUT")
+  @Create(url="https://api.exemple.com/users",protocol="POST")
+  @Delete(url="https://api.exemple.com/users{id},protocol="DELETE")
+  concept Issue {
+    @RestProperty
+    @Id
+    String id;
+    @RestProperty
+    String url;
+  }
+}
+
+Github github;
+
+testGithub(Resource<AccessPoint> accessPoint) {
+  github = connect parameters.accessPoint;
+
+ 
+
+  Repository myRepository = select Repository from github where (id="MyRepository");
+}
+
+
+
+

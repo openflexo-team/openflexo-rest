@@ -1,0 +1,8 @@
+rootProject.name = 'openflexo-rest'
+
+include 'rest-ta'
+include 'rest-ta-ui'
+include 'rest-ta-rc'
+include 'rest-ta-test'
+include 'rest-ta-test-rc'
+

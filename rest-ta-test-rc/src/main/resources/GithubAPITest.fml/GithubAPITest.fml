@@ -1,0 +1,20 @@
+namespace "http://openflexo.org/rest" as REST_NS;
+
+use org.openflexo.technologyadapter.rest.RestModelSlot as REST;
+
+import [REST_NS + "/API/GithubAPI.fml"];
+import org.openflexo.technologyadapter.rest.model.RestAccessPoint;
+
+@URI("http://openflexo.org/rest-test/GithubAPITest.fml")
+public model GithubAPITest {
+	GithubAPI github with RestModelSlot();
+
+	User sly;
+	
+	create(Resource<RestAccessPoint> resource) {
+	   connect github using parameters.resource;
+	   log "Retrieve user sylvain-openflexo";
+	   sly = select unique User from github where (selected.login=="sylvain-openflexo");
+	}
+
+}
