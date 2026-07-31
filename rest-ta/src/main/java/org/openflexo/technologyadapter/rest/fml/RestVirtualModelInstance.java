@@ -65,7 +65,7 @@ import org.openflexo.technologyadapter.rest.rm.RestAccessPointResource;
  */
 @ModelEntity
 @ImplementationClass(RestVirtualModelInstance.RestVirtualModelInstanceImpl.class)
-@Imports(@Import(RestFlexoConceptInstance.class))
+@Imports({ @Import(RestFlexoConceptInstance.class), @Import(RestObjectActorReference.class) })
 @XMLElement
 public interface RestVirtualModelInstance
 		extends ReflectedVirtualModelInstance<RestVirtualModelInstance, RestAccessPointResource, RestAccessPoint, RestTechnologyAdapter> {

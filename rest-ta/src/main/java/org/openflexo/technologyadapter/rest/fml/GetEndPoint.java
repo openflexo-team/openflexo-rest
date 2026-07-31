@@ -99,6 +99,10 @@ public class GetEndPoint extends AbstractEndPoint {
 		JsonSupport support = new JsonSupport(owner, identifier, source, null);
 
 		RestFlexoConceptInstance fci = owner.getFactory().newInstance(RestFlexoConceptInstance.class, owner, support, conceptType);
+		// getFactory() on a VirtualModelInstanceObject normally derives the factory from its owning VMI's FMLRTVirtualModelInstanceResource,
+		// which doesn't apply here (a RestVirtualModelInstance is backed by a RestAccessPointResource) - it falls back to localFactory,
+		// which must be set explicitly (same pattern as FlexoConceptInstanceImpl/VirtualModelInstanceImpl cloning).
+		fci.setLocalFactory(owner.getFactory());
 		if (!pathParams.isEmpty()) {
 			// RestFlexoConceptInstance.initializeIdentifiers() only supports a single-property key for now.
 			fci.initializeIdentifiers(String.valueOf(pathParams.values().iterator().next()));

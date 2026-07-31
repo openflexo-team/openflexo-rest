@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.IOException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 //import org.junit.jupiter.api.BeforeAll;
 
@@ -19,6 +20,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
+// This test is a workshop for developers
+@Ignore
 public class GitHubIssuesTest {
 
 	private static final String TOKEN = "XXXX"; // remplace par ton token
