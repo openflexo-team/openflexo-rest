@@ -53,7 +53,7 @@
  *
  */
 
-package org.openflexo.technologyadapter.http.controller;
+package org.openflexo.technologyadapter.rest.controller;
 
 import javax.swing.ImageIcon;
 
@@ -64,11 +64,11 @@ import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.editionaction.EditionAction;
 import org.openflexo.foundation.technologyadapter.TechnologyObject;
 import org.openflexo.gina.utils.InspectorGroup;
-import org.openflexo.technologyadapter.http.library.HttpIconLibrary;
-import org.openflexo.technologyadapter.http.view.AccessPointModuleView;
 import org.openflexo.technologyadapter.rest.RestTechnologyAdapter;
 import org.openflexo.technologyadapter.rest.fml.RestVirtualModelInstance;
+import org.openflexo.technologyadapter.rest.library.HttpIconLibrary;
 import org.openflexo.technologyadapter.rest.model.RestAccessPoint;
+import org.openflexo.technologyadapter.rest.view.AccessPointModuleView;
 import org.openflexo.view.EmptyPanel;
 import org.openflexo.view.ModuleView;
 import org.openflexo.view.controller.ControllerActionInitializer;

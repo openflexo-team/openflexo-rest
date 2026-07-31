@@ -53,7 +53,7 @@
  *
  */
 
-package org.openflexo.technologyadapter.http.library;
+package org.openflexo.technologyadapter.rest.library;
 
 import java.util.logging.Logger;
 

@@ -33,7 +33,7 @@
  *
  */
 
-package org.openflexo.technologyadapter.http.controller;
+package org.openflexo.technologyadapter.rest.controller;
 
 import org.openflexo.gina.model.FIBComponent;
 import org.openflexo.gina.view.GinaViewFactory;

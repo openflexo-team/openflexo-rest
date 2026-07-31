@@ -36,67 +36,32 @@
  * 
  */
 
-package org.openflexo.technologyadapter.http.fib;
+package org.openflexo.technologyadapter.rest.fib;
 
 import org.junit.Test;
 import org.openflexo.gina.test.GenericFIBInspectorTestCase;
 import org.openflexo.rm.FileResourceImpl;
 import org.openflexo.rm.ResourceLocator;
 
-public class TestHTTPInspectors extends GenericFIBInspectorTestCase {
+public class TestRestInspectors extends GenericFIBInspectorTestCase {
 
 	/*
 	 * Use this method to print all
 	 * Then copy-paste 
 	 */
 	public static void main(String[] args) {
-		System.out.println(generateInspectorTestCaseClass(((FileResourceImpl) ResourceLocator.locateResource("Inspectors/HTTP")).getFile(),
-				"Inspectors/HTTP/"));
-	}
-
-	@Test
-	public void testAccessPointInspector() {
-		validateFIB("Inspectors/HTTP/AccessPoint.inspector");
-	}
-
-	@Test
-	public void testCreateHttpResourceInspector() {
-		validateFIB("Inspectors/HTTP/CreateHttpResource.inspector");
-	}
-
-	@Test
-	public void testHttpModelSlotInspector() {
-		validateFIB("Inspectors/HTTP/HttpModelSlot.inspector");
-	}
-
-	@Test
-	public void testJsonRequestBehaviourInspector() {
-		validateFIB("Inspectors/HTTP/REST/JsonRequestBehaviour.inspector");
-	}
-
-	@Test
-	public void testPathBuilderInspector() {
-		validateFIB("Inspectors/HTTP/REST/PathBuilder.inspector");
+		System.out.println(generateInspectorTestCaseClass(((FileResourceImpl) ResourceLocator.locateResource("Inspectors/REST")).getFile(),
+				"Inspectors/REST/"));
 	}
 
 	@Test
 	public void testRestModelSlotInspector() {
-		validateFIB("Inspectors/HTTP/REST/RestModelSlot.inspector");
+		validateFIB("Inspectors/REST/RestModelSlot.inspector");
 	}
 
 	@Test
-	public void testPerformXmlRpcRequestInspector() {
-		validateFIB("Inspectors/HTTP/XMLRPC/PerformXmlRpcRequest.inspector");
-	}
-
-	@Test
-	public void testXmlRpcModelSlotInspector() {
-		validateFIB("Inspectors/HTTP/XMLRPC/XmlRpcModelSlot.inspector");
-	}
-
-	@Test
-	public void testXmlRpcRequestBehaviourInspector() {
-		validateFIB("Inspectors/HTTP/XMLRPC/XmlRpcRequestBehaviour.inspector");
+	public void testRestAccessPointInspector() {
+		validateFIB("Inspectors/REST/RestAccessPoint.inspector");
 	}
 
 }

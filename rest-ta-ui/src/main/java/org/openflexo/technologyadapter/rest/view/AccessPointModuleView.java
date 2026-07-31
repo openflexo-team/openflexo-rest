@@ -53,7 +53,7 @@
  *
  */
 
-package org.openflexo.technologyadapter.http.view;
+package org.openflexo.technologyadapter.rest.view;
 
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.rm.Resource;
