@@ -76,7 +76,7 @@ import org.openflexo.view.controller.FlexoController;
 import org.openflexo.view.controller.TechnologyAdapterController;
 import org.openflexo.view.controller.model.FlexoPerspective;
 
-public class HttpAdapterController extends TechnologyAdapterController<RestTechnologyAdapter> {
+public class RestAdapterController extends TechnologyAdapterController<RestTechnologyAdapter> {
 
 	private InspectorGroup httpInspectorGroup;
 

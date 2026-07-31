@@ -1,1 +1,1 @@
-org.openflexo.technologyadapter.http.controller.HttpAdapterController
+org.openflexo.technologyadapter.rest.controller.RestAdapterController

@@ -42,9 +42,9 @@ import org.openflexo.view.controller.FlexoFIBController;
 /**
  * Controller for HTTP Module
  */
-public class HttpModuleViewController extends FlexoFIBController {
+public class RestModuleViewController extends FlexoFIBController {
 
-	public HttpModuleViewController(FIBComponent component, GinaViewFactory<?> viewFactory) {
+	public RestModuleViewController(FIBComponent component, GinaViewFactory<?> viewFactory) {
 		super(component, viewFactory);
 	}
 }
