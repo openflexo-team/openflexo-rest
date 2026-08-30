@@ -35,6 +35,7 @@ import org.openflexo.pamela.annotations.ModelEntity;
 import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.rest.RestModelSlot.RestModelSlotImpl;
+import org.openflexo.technologyadapter.rest.fml.RestObjectActorReference;
 import org.openflexo.technologyadapter.rest.fml.RestVirtualModelInstance;
 import org.openflexo.technologyadapter.rest.fml.RestVirtualModelInstanceModelFactory;
 import org.openflexo.technologyadapter.rest.model.RestAccessPoint;
@@ -47,7 +48,7 @@ import org.openflexo.technologyadapter.rest.rm.RestAccessPointResource;
 @ModelEntity
 @XMLElement
 @ImplementationClass(RestModelSlotImpl.class)
-@DeclareActorReferences({ ReflectedFMLRTModelSlotInstance.class })
+@DeclareActorReferences({ ReflectedFMLRTModelSlotInstance.class, RestObjectActorReference.class })
 /*@DeclareFlexoRoles({ RestObjectRole.class })
 @DeclareEditionActions({ CreateHttpRestResource.class })
 @DeclareFlexoBehaviours({ HttpInitializer.class, RestObjectRetriever.class, JsonRequestBehaviour.class })
