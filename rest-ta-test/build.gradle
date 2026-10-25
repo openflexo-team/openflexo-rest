@@ -3,7 +3,7 @@ dependencies {
   implementation project(":rest-ta")
 
   // openflexo dep
-  implementation group: 'junit', name: 'junit', version: '4.13.2'
+  implementation 'junit:junit:4.13.2'
 
   // testing dep
   testImplementation flexoFoundation()
@@ -14,7 +14,7 @@ dependencies {
   // rest-ta declares these as `implementation` (java-library), so they aren't exposed transitively to this
   // module's test compile classpath even though `rest-ta` itself is a dependency - tests using rest-assured/jackson
   // directly (rather than only through rest-ta's own API) need them declared explicitly here too.
-  testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+  testImplementation 'io.rest-assured:rest-assured:5.3.0'
   testImplementation jacksonDatabind()
 
   // Test resource center

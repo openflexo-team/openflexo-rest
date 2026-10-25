@@ -5,8 +5,8 @@ dependencies {
     implementation jacksonDatabind()
     implementation commonsIo()
 
-    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
-    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.3.0'
+    implementation 'io.rest-assured:rest-assured:5.3.0'
+    implementation 'io.rest-assured:json-schema-validator:5.3.0'
 
     // This resource center must always be present at run-time
     runtimeOnly project(':rest-ta-rc')
