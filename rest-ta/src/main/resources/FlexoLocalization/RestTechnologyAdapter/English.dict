@@ -6,7 +6,6 @@ Private=Private
 Protected=Protected
 Public=Public
 Request=Request
-XmlRpcRequestBehaviour$XmlRpcRequestBehaviourImpl_$$_jvst8d5_a1=XmlRpcRequestBehaviour$XmlRpcRequestBehaviourImpl $$ jvst8d5 a1
 author=Author
 base_url=Base URL
 define_popup_size=Define popup size
