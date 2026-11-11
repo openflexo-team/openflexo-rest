@@ -32,7 +32,6 @@ import org.openflexo.foundation.fml.rt.reflect.ReflectedFMLRTModelSlotInstance;
 import org.openflexo.foundation.resource.StreamIODelegate;
 import org.openflexo.pamela.annotations.ImplementationClass;
 import org.openflexo.pamela.annotations.ModelEntity;
-import org.openflexo.pamela.annotations.XMLElement;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.rest.RestModelSlot.RestModelSlotImpl;
 import org.openflexo.technologyadapter.rest.fml.RestObjectActorReference;
@@ -46,7 +45,6 @@ import org.openflexo.technologyadapter.rest.rm.RestAccessPointResource;
  *
  */
 @ModelEntity
-@XMLElement
 @ImplementationClass(RestModelSlotImpl.class)
 @DeclareActorReferences({ ReflectedFMLRTModelSlotInstance.class, RestObjectActorReference.class })
 /*@DeclareFlexoRoles({ RestObjectRole.class })
