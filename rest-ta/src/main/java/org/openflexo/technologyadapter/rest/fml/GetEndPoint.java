@@ -17,7 +17,7 @@ import org.openflexo.foundation.fml.FMLUtils;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
 import org.openflexo.foundation.fml.md.MultiValuedMetaData;
-import org.openflexo.foundation.fml.rt.FMLExecutionException;
+import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.technologyadapter.rest.model.RestAccessPoint;
 

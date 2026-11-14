@@ -1,6 +1,6 @@
 package org.openflexo.technologyadapter.rest.fml;
 
-import org.openflexo.foundation.fml.rt.FMLExecutionException;
+import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 
 /**
  * Thrown when a REST call cannot be authenticated: either a {@code secretRef} could not be resolved to any value, or the remote API
