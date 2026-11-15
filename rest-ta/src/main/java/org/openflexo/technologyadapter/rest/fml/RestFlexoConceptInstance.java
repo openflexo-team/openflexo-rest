@@ -39,6 +39,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
+import org.openflexo.connie.EvaluationPolicy;
 import org.openflexo.connie.BindingVariable;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoConceptInstanceRole;
@@ -115,16 +117,19 @@ public interface RestFlexoConceptInstance extends ReflectedFlexoConceptInstance<
 			return (RestVirtualModelInstance) super.getVirtualModelInstance();
 		}
 
+		// The entry point that getValue(BindingVariable) wraps, reached by lenient and strict evaluations (CORE-F-11)
 		@Override
-		public Object getValue(BindingVariable variable) {
+		public Object getValue(BindingVariable variable, EvaluationPolicy policy) {
 			if (identifiers.get(variable.getVariableName()) != null) {
 				return identifiers.get(variable.getVariableName());
 			}
-			return super.getValue(variable);
+			return super.getValue(variable, policy);
 		}
 
+		// The strict entry point, which the lenient getFlexoPropertyValue() wraps: FML execution and the user interface both reach this
+		// mapping (CORE-F-11)
 		@Override
-		public <T> T getFlexoPropertyValue(FlexoProperty<T> flexoProperty) {
+		public <T> T getFlexoPropertyValueOrFail(FlexoProperty<T> flexoProperty) throws FMLExecutionException {
 			if (identifiers.get(flexoProperty.getName()) != null) {
 				return (T) identifiers.get(flexoProperty.getName());
 			}
@@ -138,7 +143,7 @@ public interface RestFlexoConceptInstance extends ReflectedFlexoConceptInstance<
 					&& (getSupportObject() == null || !getSupportObject().hasValue(flexoProperty.getName()))) {
 				retrieveFullInformations();
 			}
-			return super.getFlexoPropertyValue(flexoProperty);
+			return super.getFlexoPropertyValueOrFail(flexoProperty);
 		}
 
 		@Override
