@@ -10,13 +10,13 @@ import java.util.Map;
 
 import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.DataBinding.BindingDefinitionType;
-import org.openflexo.connie.exception.NullReferenceException;
-import org.openflexo.connie.exception.TypeMismatchException;
 import org.openflexo.connie.expr.Expression;
 import org.openflexo.foundation.fml.FMLUtils;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
 import org.openflexo.foundation.fml.md.MultiValuedMetaData;
+import org.openflexo.foundation.fml.rt.error.FMLTechnologyError;
+import org.openflexo.foundation.fml.rt.error.FMLEvaluation;
 import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
 import org.openflexo.technologyadapter.rest.model.RestAccessPoint;
@@ -50,7 +50,7 @@ public class GetEndPoint extends AbstractEndPoint {
 		Map<String, Object> pathParams = new HashMap<>();
 		for (FetchRequestCondition condition : conditions) {
 			if (!FMLUtils.isIndexableCondition(condition)) {
-				throw new FMLExecutionException(
+				throw new FMLTechnologyError(
 						"Condition '" + condition.getCondition() + "' is not a simple equality on a property of the selected object, "
 								+ "which is required to build the REST call for '" + getUrl() + "'");
 			}
@@ -59,15 +59,21 @@ public class GetEndPoint extends AbstractEndPoint {
 			String propertyName = indexableTerm.toString().replaceFirst("^selected\\.", "");
 			DataBinding<?> valueBinding = new DataBinding<>(oppositeTerm.toString(), condition, Object.class,
 					BindingDefinitionType.GET);
-			try {
-				pathParams.put(propertyName, valueBinding.getBindingValue(evaluationContext));
-			} catch (TypeMismatchException | NullReferenceException | ReflectiveOperationException e) {
-				throw new FMLExecutionException("Could not evaluate condition '" + condition.getCondition() + "'", e);
-			}
+			pathParams.put(propertyName, FMLEvaluation.evaluate(valueBinding, evaluationContext, condition));
 		}
 
 		RequestSpecification requestSpecification = buildRequestSpecification(accessPoint);
-		Response response = given(requestSpecification).pathParams(pathParams).when().get(getUrl());
+		Response response;
+		try {
+			response = given(requestSpecification).pathParams(pathParams).when().get(getUrl());
+		} catch (RuntimeException e) {
+			// Not a failure of the remote call: a defect, or a URL template that does not fit its parameters
+			throw e;
+		} catch (Exception e) {
+			// REST-assured throws the I/O failures of the call (connection refused, unknown host, timeout) without declaring them
+			throw new FMLTechnologyError("REST call to '" + accessPoint.getBaseURL() + getUrl() + "' (access point '" + accessPoint.getName()
+					+ "') failed: " + e, e);
+		}
 
 		if (response.getStatusCode() == 401) {
 			throw new BadCredentialsException("REST call to '" + accessPoint.getBaseURL() + getUrl() + "' (access point '"
@@ -78,7 +84,7 @@ public class GetEndPoint extends AbstractEndPoint {
 			return Collections.emptyList();
 		}
 		if (response.getStatusCode() < 200 || response.getStatusCode() >= 300) {
-			throw new FMLExecutionException("REST call to '" + accessPoint.getBaseURL() + getUrl() + "' (access point '"
+			throw new FMLTechnologyError("REST call to '" + accessPoint.getBaseURL() + getUrl() + "' (access point '"
 					+ accessPoint.getName() + "') failed with HTTP status " + response.getStatusCode() + ": "
 					+ response.getBody().asString());
 		}
@@ -87,12 +93,12 @@ public class GetEndPoint extends AbstractEndPoint {
 		try {
 			JsonNode node = new ObjectMapper().readTree(response.getBody().asString());
 			if (!(node instanceof ObjectNode)) {
-				throw new FMLExecutionException(
+				throw new FMLTechnologyError(
 						"REST call to '" + accessPoint.getBaseURL() + getUrl() + "' did not return a JSON object: " + node);
 			}
 			source = (ObjectNode) node;
 		} catch (IOException e) {
-			throw new FMLExecutionException("Could not parse JSON response from '" + accessPoint.getBaseURL() + getUrl() + "'", e);
+			throw new FMLTechnologyError("Could not parse JSON response from '" + accessPoint.getBaseURL() + getUrl() + "'", e);
 		}
 
 		String identifier = pathParams.isEmpty() ? getUrl() : String.valueOf(pathParams.values().iterator().next());

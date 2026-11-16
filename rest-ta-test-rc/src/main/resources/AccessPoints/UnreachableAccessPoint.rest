@@ -1,0 +1,4 @@
+# An access point no server answers (CORE-F-11 phase 6, REST-F-1): the port 1 of the local host refuses the connection
+name=Unreachable REST API
+baseURL=http://127.0.0.1:1
+description=No server answers here: used by TestRestErrorKinds

@@ -43,6 +43,12 @@ import java.util.logging.Logger;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
+import java.io.FileNotFoundException;
+import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
+import org.openflexo.foundation.fml.rt.error.FMLCancellation;
+import org.openflexo.foundation.fml.rt.error.FMLNullReferenceError;
+import org.openflexo.foundation.fml.rt.error.FMLTechnologyError;
 import org.openflexo.foundation.fml.rt.error.FMLExecutionException;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.RunTimeEvaluationContext;
@@ -110,21 +116,27 @@ public interface RestVirtualModelInstance
 
 			RestEntity restEntity = RestEntity.getRestEntity(conceptType);
 
-			if (restEntity != null) {
-
-				RestAccessPointResource reflectedResource = getReflectedResource();
-				RestAccessPoint loadedResourceData = reflectedResource.getLoadedResourceData();
-
-				if (restEntity.getGetEndPoint() != null) {
-					return restEntity.getGetEndPoint().selectFlexoConceptInstances(this, conceptType, loadedResourceData, conditions,
-							evaluationContext);
-				}
+			if (restEntity == null) {
+				throw new FMLTechnologyError("Cannot select " + conceptType.getName() + ": not a REST entity (no @RestEntity)");
 			}
-			else {
-				throw new FMLExecutionException("Cannot select non REST entities (" + conceptType + ")");
+			RestAccessPointResource reflectedResource = getReflectedResource();
+			if (reflectedResource == null) {
+				throw new FMLNullReferenceError("Cannot select " + conceptType.getName() + ": no REST access point connected");
 			}
-
-			return null;
+			// The access point is loaded on demand: connecting the model slot does not load it
+			RestAccessPoint loadedResourceData;
+			try {
+				loadedResourceData = reflectedResource.getResourceData();
+			} catch (ResourceLoadingCancelledException e) {
+				throw new FMLCancellation("Loading of the REST access point " + reflectedResource.getName() + " was cancelled", e);
+			} catch (FileNotFoundException | FlexoException e) {
+				throw new FMLTechnologyError("Cannot load the REST access point " + reflectedResource.getName() + ": " + e.getMessage(), e);
+			}
+			if (restEntity.getGetEndPoint() == null) {
+				throw new FMLTechnologyError("Cannot select " + conceptType.getName() + ": no @Get endpoint");
+			}
+			return restEntity.getGetEndPoint().selectFlexoConceptInstances(this, conceptType, loadedResourceData, conditions,
+					evaluationContext);
 		}
 
 		/*@Override

@@ -1,0 +1,23 @@
+namespace "http://openflexo.org/rest" as REST_NS;
+
+use org.openflexo.technologyadapter.rest.RestModelSlot as REST;
+
+import [REST_NS + "/API/GithubAPI.fml"];
+import org.openflexo.technologyadapter.rest.model.RestAccessPoint;
+
+/**
+ * Failures of the REST adapter (CORE-F-11 phase 6, REST-F-1), against access points no server answers: see the scripts of
+ * RestErrorKinds/ and TestRestErrorKinds. The line numbers of the behaviours are asserted there.
+ */
+@URI("http://openflexo.org/rest-test/RestErrorKinds.fml")
+public model RestErrorKinds {
+	GithubAPI api with RestModelSlot();
+
+	create(Resource<RestAccessPoint> resource) {
+		connect api using parameters.resource;
+	}
+
+	public User userNamed(String login) {
+		return select unique User from api where (selected.login == parameters.login);
+	}
+}
