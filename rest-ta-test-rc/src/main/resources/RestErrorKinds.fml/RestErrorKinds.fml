@@ -14,10 +14,10 @@ public model RestErrorKinds {
 	GithubAPI api with RestModelSlot();
 
 	create(Resource<RestAccessPoint> resource) {
-		connect api using parameters.resource;
+		connect api using resource;
 	}
 
 	public User userNamed(String login) {
-		return select unique User from api where (selected.login == parameters.login);
+		return select unique User from api where (selected.login == login);
 	}
 }

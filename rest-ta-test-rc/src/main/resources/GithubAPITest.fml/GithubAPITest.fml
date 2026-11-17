@@ -12,7 +12,7 @@ public model GithubAPITest {
 	User sly;
 	
 	create(Resource<RestAccessPoint> resource) {
-	   connect github using parameters.resource;
+	   connect github using resource;
 	   log "Retrieve user sylvain-openflexo";
 	   sly = select unique User from github where (selected.login=="sylvain-openflexo");
 	}
