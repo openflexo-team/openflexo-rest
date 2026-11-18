@@ -48,7 +48,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.fml.CreationScheme;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -78,14 +78,14 @@ public class TestGithubAPI extends OpenflexoProjectAtRunTimeTestCase {
 	/**
 	 * Retrieve the ViewPoint
 	 * 
-	 * @throws FlexoException
+	 * @throws OpenflexoRuntimeException
 	 * @throws ResourceLoadingCancelledException
 	 * @throws FileNotFoundException
 	 */
 	@Test
 	@TestOrder(1)
 	@Category(UITest.class)
-	public void testLoadViewPoint() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testLoadViewPoint() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 		instanciateTestServiceManager(RestTechnologyAdapter.class);
 
 		// XMLTechnologyAdapter xmlTA = serviceManager.getTechnologyAdapterService().getTechnologyAdapter(XMLTechnologyAdapter.class);
@@ -142,7 +142,7 @@ public class TestGithubAPI extends OpenflexoProjectAtRunTimeTestCase {
 	@Test
 	@TestOrder(3)
 	@Category(UITest.class)
-	public void testCreateInstance() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testCreateInstance() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 
 		System.err.println("testCreateInstance()");
 		CreateBasicVirtualModelInstance action = CreateBasicVirtualModelInstance.actionType

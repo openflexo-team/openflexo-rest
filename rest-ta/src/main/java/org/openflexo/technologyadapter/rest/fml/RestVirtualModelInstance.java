@@ -44,7 +44,7 @@ import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
 import java.io.FileNotFoundException;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.fml.rt.error.FMLCancellation;
 import org.openflexo.foundation.fml.rt.error.FMLNullReferenceError;
@@ -129,7 +129,7 @@ public interface RestVirtualModelInstance
 				loadedResourceData = reflectedResource.getResourceData();
 			} catch (ResourceLoadingCancelledException e) {
 				throw new FMLCancellation("Loading of the REST access point " + reflectedResource.getName() + " was cancelled", e);
-			} catch (FileNotFoundException | FlexoException e) {
+			} catch (FileNotFoundException | OpenflexoRuntimeException e) {
 				throw new FMLTechnologyError("Cannot load the REST access point " + reflectedResource.getName() + ": " + e.getMessage(), e);
 			}
 			if (restEntity.getGetEndPoint() == null) {
