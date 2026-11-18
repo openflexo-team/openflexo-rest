@@ -13,6 +13,8 @@ Status legend: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE` · `DEFERRED`.
 
 ### REST-F-1 — The REST adapter raises typed FML errors  ·  `DONE`
 
+**GitHub:** [openflexo-team/openflexo-rest#1](https://github.com/openflexo-team/openflexo-rest/issues/1)
+
 **Problem.** Part of `CORE-F-11` phase 6 (`openflexo-core/BACKLOG.md`): the REST adapter already raised its failures, but untyped
 (`FMLExecutionException`, and `BadCredentialsException` under it); a REST call that could not connect escaped as an undeclared I/O
 exception of REST-assured; a select of a REST entity without `@Get` endpoint returned null (an empty result).
